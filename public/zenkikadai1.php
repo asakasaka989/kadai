@@ -47,6 +47,7 @@ $select_sth->execute();
 <hr>
 <?php foreach($select_sth as $entry): ?>
 <dl style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc;">
+<!-- 個別ページへの遷移 -->
 <a href="./zenkikadai1_view.php?id=<?= $entry['id'] ?>">
 <div>
 <p><?= $entry['id'] ?></p>
@@ -64,7 +65,7 @@ $select_sth->execute();
 </a>
 </dl>
 <?php endforeach ?>
-
+<!-- 5MB以下の画像をアップロードできないようにする -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const imageInput = document.getElementById("imageInput");
@@ -75,28 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (imageInput.files[0].size > 5 * 1024 * 1024) {
         // ファイルが5MBより多い場合
-        alert("5MB以上のファイルを選択されたので画像を縮小します。");
-          
-        const file = this.files[0];
-        let reader = new FileReader();
-        reader.onload = () => {
-          const imgData = reader.result;
-          const resizedImgData = resizeImg(imgData);
-          const image = document.getElementById('img');
-          image.src = resizedImgData;
-        };
-        reader.readAsDataURL(file);
-        function resizeImg(imgData){
-        const canvas = document.createElement('canvas');
-        canvas.width = 150;
-        canvas.height = 150;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(imageData, 0, 0, 150, 150);
-        return canvas.toDataURL('image/png')
-        }
+        alert("5MB以下のファイルを選択してください。");
+        imageInput.value = "";
         }
         });
     });
 </script>
-
 
