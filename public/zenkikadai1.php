@@ -37,6 +37,7 @@ $select_sth->execute();
 
 
 <!-- フォームのPOST先はこのファイル自身にする -->
+<link rel="stylesheet" href="./css/zenkikadai1.css">
 <form method="POST" action="./zenkikadai1.php" enctype="multipart/form-data">
 <textarea name="body"></textarea>
 <div style="margin: 1em 0;">
@@ -46,11 +47,11 @@ $select_sth->execute();
 </form>
 <hr>
 <?php foreach($select_sth as $entry): ?>
-<dl style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc;">
+<dl style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc; max-width: 800px; margin: 0 auto">
 <!-- 個別ページへの遷移 -->
 <a href="./zenkikadai1_view.php?id=<?= $entry['id'] ?>">
-<div>
-<p><?= $entry['id'] ?></p>
+<div style="display: flex;">
+<p style="margin-right: 20px;"><?= $entry['id'] ?></p>
 <p><?= $entry['created_at'] ?></p>
 </div>
 <dt>内容</dt>
